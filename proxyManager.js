@@ -26,6 +26,8 @@ export function getRandomProxy(excludeProxies = []) {
   return proxies[Math.floor(Math.random() * proxies.length)];
 }
 
+const defaultDispatcher = getGlobalDispatcher();
+
 export function applyProxy(proxyUrl) {
   if (proxyUrl) {
     console.log(`[Proxy] Đang áp dụng Proxy: ${proxyUrl}`);
@@ -44,7 +46,7 @@ export function applyProxy(proxyUrl) {
     delete process.env.HTTPS_PROXY;
     delete process.env.http_proxy;
     delete process.env.https_proxy;
-    setGlobalDispatcher(getGlobalDispatcher());
+    setGlobalDispatcher(defaultDispatcher);
   }
 }
 

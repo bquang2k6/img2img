@@ -182,7 +182,12 @@
         
         let outputContent = '';
         if (typeof outData === 'string' && outData.trim().startsWith('<')) {
-          outputContent = outData;
+          const match = outData.match(/src=['"]([^'"]+)['"]/);
+          if (match && match[1]) {
+            outputContent = `<img src="${match[1]}" alt="Output">`;
+          } else {
+            outputContent = outData;
+          }
         } else {
           outputContent = `<img src="${outData}" alt="Output">`;
         }
