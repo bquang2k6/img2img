@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locket Wan — Filter Prompts</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #0b0b10;
+            color: #f5f5f7;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(11, 11, 16, .92);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid #24242d;
+            padding: 20px;
+        }
+
+        .header-inner {
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        h1 {
+            margin: 0 0 6px;
+            font-size: 25px;
+        }
+
+        .sub {
+            color: #9999a6;
+            font-size: 14px;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        input,
+        select {
+            border: 1px solid #30303a;
+            background: #15151c;
+            color: #fff;
+            border-radius: 10px;
+            padding: 11px 13px;
+            outline: none;
+        }
+
+        input {
+            flex: 1;
+            min-width: 240px;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #7c3aed;
+        }
+
+        main {
+            max-width: 1400px;
+            margin: auto;
+            padding: 24px 20px 60px;
+        }
+
+        .category {
+            margin-bottom: 36px;
+        }
+
+        .category-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 0 14px;
+            font-size: 20px;
+        }
+
+        .count {
+            font-size: 12px;
+            color: #aaa;
+            background: #1b1b23;
+            border: 1px solid #2a2a34;
+            border-radius: 999px;
+            padding: 3px 8px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 14px;
+        }
+
+        .card {
+            overflow: hidden;
+            background: #13131a;
+            border: 1px solid #282832;
+            border-radius: 15px;
+        }
+
+        .preview {
+            height: 190px;
+            background: #0f0f15;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid #282832;
+            position: relative;
+        }
+
+        .preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 14px;
+        }
+
+        .no-image {
+            color: #666674;
+            font-size: 13px;
+        }
+
+        .body {
+            padding: 15px;
+        }
+
+        .title-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .name {
+            font-weight: 700;
+            font-size: 17px;
+        }
+
+        .id {
+            margin-top: 4px;
+            color: #9b9ba8;
+            font: 12px ui-monospace, SFMono-Regular, Consolas, monospace;
+            word-break: break-all;
+        }
+
+        .prompt {
+            margin-top: 13px;
+            white-space: pre-wrap;
+            line-height: 1.55;
+            color: #d3d3db;
+            background: #0e0e14;
+            border: 1px solid #24242d;
+            border-radius: 10px;
+            padding: 12px;
+            max-height: 300px;
+            overflow: auto;
+            font-size: 12px;
+        }
+
+        .url {
+            margin-top: 10px;
+            padding: 10px;
+            background: #0e0e14;
+            border: 1px solid #24242d;
+            border-radius: 10px;
+            font: 11px ui-monospace, SFMono-Regular, Consolas, monospace;
+            color: #b9a0ff;
+            word-break: break-all;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        button {
+            border: 1px solid #363642;
+            background: #1b1b24;
+            color: #fff;
+            padding: 9px 11px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        button:hover {
+            background: #272733;
+        }
+
+        button.primary {
+            background: #6d28d9;
+            border-color: #7c3aed;
+        }
+
+        button.primary:hover {
+            background: #7c3aed;
+        }
+
+        a {
+            color: #b9a0ff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 70px 20px;
+            color: #777784;
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .preview {
+                height: 160px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-inner">
+            <h1>🎨 Locket Wan Filter Prompts</h1>
+            <div class="sub"><span id="total">0</span> filters · Preview icon · Prompt · Icon URL</div>
+            <div class="toolbar">
+                <input id="search" type="search" placeholder="Tìm theo tên, filter_id hoặc prompt...">
+                <select id="category">
+                    <option value="all">Tất cả categories</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <main id="app"></main>
+    <div id="empty" class="empty">Không tìm thấy filter phù hợp.</div>
+
+    <script>
+        let DATA = [];
+
+        const app = document.getElementById("app");
+        const search = document.getElementById("search");
+        const category = document.getElementById("category");
+        const empty = document.getElementById("empty");
+
+        function esc(s) {
+            return String(s).replace(/[&<>"']/g, m => ({
+                "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+            }[m]));
+        }
+
+        function copyText(text, button) {
+            navigator.clipboard.writeText(text).then(() => {
+                const old = button.textContent;
+                button.textContent = "✓ Copied";
+                setTimeout(() => button.textContent = old, 1200);
+            });
+        }
+
+        function render() {
+            const q = search.value.trim().toLowerCase();
+            const cat = category.value;
+            let visible = 0;
+
+            app.innerHTML = DATA.map(c => {
+                if (cat !== "all" && cat !== c.id) return "";
+
+                const filters = c.filters.filter(f =>
+                    !q ||
+                    f.filter_id.toLowerCase().includes(q) ||
+                    f.filter_label.toLowerCase().includes(q) ||
+                    f.prompt.toLowerCase().includes(q) ||
+                    f.icon_url.toLowerCase().includes(q)
+                );
+
+                if (!filters.length) return "";
+                visible += filters.length;
+
+                return `
+      <section class="category">
+        <h2 class="category-title">
+          ${esc(c.title)}
+          <span class="count">${filters.length}</span>
+        </h2>
+        <div class="grid">
+          ${filters.map((f) => `
+            <article class="card">
+              <div class="preview">
+                <img src="${esc(f.icon_url)}" alt="${esc(f.filter_label)}"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                <span class="no-image" style="display:none">Không tải được icon</span>
+              </div>
+              <div class="body">
+                <div class="title-row">
+                  <div>
+                    <div class="name">${esc(f.filter_label)}</div>
+                    <div class="id">${esc(f.filter_id)}</div>
+                  </div>
+                </div>
+
+                <div class="prompt">${esc(f.prompt)}</div>
+
+                <div class="url">
+                  <a href="${esc(f.icon_url)}" target="_blank" rel="noopener">${esc(f.icon_url)}</a>
+                </div>
+
+                <div class="actions">
+                  <button class="primary" onclick="copyText(${JSON.stringify(f.prompt)}, this)">Copy Prompt</button>
+                  <button onclick="copyText(${JSON.stringify(f.icon_url)}, this)">Copy URL</button>
+                  <button onclick="window.open(${JSON.stringify(f.icon_url)}, '_blank')">Open Icon</button>
+                </div>
+              </div>
+            </article>
+          `).join("")}
+        </div>
+      </section>
+    `;
+            }).join("");
+
+            empty.style.display = visible ? "none" : "block";
+        }
+
+        // Tải dữ liệu từ file filters.json nằm cùng thư mục
+        fetch("./filters.json")
+            .then(res => {
+                if (!res.ok) throw new Error("HTTP error " + res.status);
+                return res.json();
+            })
+            .then(data => {
+                DATA = data;
+                DATA.forEach(c => {
+                    const opt = document.createElement("option");
+                    opt.value = c.id;
+                    opt.textContent = c.title;
+                    category.appendChild(opt);
+                });
+
+                const allFilters = DATA.flatMap(c => c.filters);
+                document.getElementById("total").textContent = allFilters.length;
+                render();
+            })
+            .catch(err => {
+                console.error("Lỗi khi đọc file JSON:", err);
+                empty.style.display = "block";
+                empty.textContent = "Không thể tải dữ liệu filters.json. Hãy đảm bảo bạn mở qua local web server (ví dụ: python -m http.server).";
+            });
+
+        search.addEventListener("input", render);
+        category.addEventListener("change", render);
+    </script>
+</body>
+
+</html>

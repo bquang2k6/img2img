@@ -2,8 +2,19 @@
   "type": "module",
   "dependencies": {
     "@fal-ai/client": "^1.10.1",
+    "@fal-ai/serverless-client": "^0.15.0",
+    "@gradio/client": "^2.6.0",
+    "@huggingface/inference": "^4.13.28",
+    "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "replicate": "^1.4.0"
+    "multer": "^2.4.0",
+    "node-fetch": "^3.3.2",
+    "proxy-agent": "^8.0.2",
+    "replicate": "^1.4.0",
+    "sharp": "^0.35.4",
+    "socket.io": "^4.8.3",
+    "together-ai": "^0.53.0",
+    "undici": "^7.29.1"
   }
 }

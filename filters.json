@@ -1,0 +1,432 @@
+[
+  {
+    "id": "events",
+    "title": "Events",
+    "active": true,
+    "filters": [
+      {
+        "uid": "7dec9068-64e1-4336-be41-8e6b509cdde5",
+        "active": true,
+        "prompt": "Preserve the original photo and background. Add lush, deep green vines and subtle flowers throughout the environment, with some vines reaching toward and around the user to create a magical, interactive feeling. Add 1–2 soft roses in the background, mixing white and pink. Include small and subtle glowing fireflies for warmth and atmosphere, but keep them small, dim, sparse, and understated. Keep the overall look dreamy, natural, and slightly enchanted, without turning the setting into a full greenhouse.",
+        "icon_url": "https://storage.googleapis.com/locket-public/camera_filters/icons/pm2_cutout.png",
+        "order_id": 0,
+        "filter_id": "practical_magic_2",
+        "filter_type": "normal",
+        "filter_label": "Practical Magic 2"
+      }
+    ],
+    "order_id": 0,
+    "created_at": "2026-09-11T23:10:57.185053+00:00",
+    "updated_at": "2026-09-11T23:10:57.185053+00:00"
+  },
+  {
+    "id": "goofy",
+    "title": "Goofy",
+    "active": true,
+    "filters": [
+      {
+        "uid": "369e8029-5612-4640-b973-1f52c6bf7e52",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with one front tooth missing, captured with a modern iPhone camera look.\\n\\nIf the subject's teeth are already visible, remove one of the upper central front teeth (typically one of the two front incisors) so there is a clearly visible gap. If the subject is not already smiling with visible teeth, adjust only the mouth expression to a natural, slight smile that reveals the teeth, ensuring the missing front tooth is clearly visible. Do not alter the rest of the facial expression or facial structure beyond what is necessary to reveal the teeth.\\n\\nThe gap should look natural, with realistic gum detail and subtle shadowing inside the mouth. Surrounding teeth should remain unchanged in shape, color, and alignment. Maintain proper lighting inside the mouth so the result feels physically accurate and not artificially edited.\\n\\nPreserve the subject's identity, face shape, and proportions exactly. Do not enlarge or distort the mouth or head. Keep skin texture, lips, and surrounding features consistent with the original image.\\n\\nApply modern iPhone camera characteristics across the entire image: natural HDR, crisp detail, balanced highlights and shadows, and true-to-life but slightly vibrant colors.\\n\\nKeep the background, pose, framing, depth of field, and image quality exactly the same, with the missing tooth appearing as a natural, in-camera detail. Do not change the overall compsition of the photo, do not add new people to the photo, only show each person in the photo one time.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/toothless.png",
+        "order_id": 0,
+        "filter_id": "toothless",
+        "filter_type": "normal",
+        "filter_label": "Toothless"
+      },
+      {
+        "uid": "d46b396e-75b6-4b5e-977e-06fd4453c617",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with a realistic orange bob wig worn naturally on the head. The wig should be a vibrant but natural-looking orange tone (not overly saturated), with a clean, chin-length bob cut that curves slightly inward at the ends. Include soft layering and subtle strand variation so the hair does not appear flat or artificial.\\n\\nThe wig should sit convincingly along the scalp, aligning precisely with the existing hairline without changing its shape or position. Allow a few natural flyaways and slight irregularities to enhance realism. The hair should follow gravity and the person's head position, with gentle volume and curvature consistent with a real styled bob.\\n\\nEnsure the wig integrates seamlessly with the scene's lighting, showing appropriate highlights, lowlights, and soft shadows between strands. If applicable, include subtle shadowing where the wig meets the forehead and sides of the face. Do not alter the person's face, expression, skin tone, or any visible facial features. Keep the background, pose, framing, depth of field, and image quality exactly the same. Do not change the overall compsition of the photo, do not add new people to the photo, only show each person in the photo one time.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/orange_wig.png",
+        "order_id": 0,
+        "filter_id": "okay_wig",
+        "filter_type": "normal",
+        "filter_label": "Okay Wig"
+      },
+      {
+        "uid": "c6bac5d9-e32b-4f9f-99c7-ff9725d63766",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with a hyperbolic \\\"influencer\\\" makeup look applied to the face, captured with a modern iPhone camera look.\\n\\nEnhance the eyebrows so they appear highly sculpted and precisely shaped, with sharp definition and fuller density while preserving the original eyebrow placement and bone structure. The brows should have clean edges, slightly darker pigment, and visible individual hair strokes so they look groomed rather than painted.\\n\\nAdd long, dramatic fake eyelashes that extend outward and upward from the natural lash line. The lashes should appear thick and layered with subtle tapering at the ends, curving naturally with the eyelid and casting faint shadows onto the upper cheek area.\\n\\nEnhance the lips with a glossy finish and visibly enlarged lip volume, resembling cosmetic lip injections. The lips should appear fuller and more plump while maintaining the person's original lip shape and proportions. Add natural specular highlights and reflective gloss texture across the surface to create a shiny appearance, with slight light reflections consistent with the scene.\\n\\nAll enhancements should remain confined strictly to the facial features. Do not alter the overall head size, face shape, or identity. Preserve natural skin texture, pores, and lighting so the makeup integrates realistically with the environment.\\n\\nApply modern iPhone camera characteristics across the entire image: natural HDR, crisp facial detail, balanced highlights and shadows, and slightly vibrant but realistic colors. The enhancements should inherit this same processing so they feel captured in-camera.\\n\\nKeep the background, pose, framing, depth of field, and image quality exactly the same. Do not change the overall compsition of the photo, do not add new people to the photo, only show each person in the photo one time.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/influencer.png",
+        "order_id": 0,
+        "filter_id": "influencer",
+        "filter_type": "normal",
+        "filter_label": "Influencer"
+      },
+      {
+        "uid": "1c6390ea-4dac-4802-b40e-acf23a263b1f",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with a hyperbolically chiseled jawline and strongly emphasized cheekbones for an exaggerated, \\\"looksmaxxed\\\" appearance.\\n\\nSharpen the jawline significantly, creating very crisp, angular edges along the mandibular line with a pronounced, squared jaw angle. The chin should appear more prominent and sculpted, with a defined, forward structure and clean lower contour. Despite the exaggeration, the overall head size and silhouette must remain unchanged, with no outward expansion or distortion of the skull shape.\\n\\nEnhance the cheekbones by increasing their prominence and height, adding clear structure beneath the eyes and tapering into the jawline. Introduce stronger but still realistic shadowing beneath the cheekbones and along the jaw to create depth and contrast, with smooth gradients that follow the original lighting direction. Slightly reduce mid-face softness to emphasize bone structure, but preserve natural skin texture and avoid over-smoothing.\\n\\nAll enhancements should remain anatomically coherent and integrated with the person's original features, maintaining identity and expression. Ensure lighting, color, and shadow behavior match the scene exactly, with highlights and contours reinforcing the new structure without introducing artificial artifacts.\\n\\nDo not alter the person's face beyond bone structure definition, and do not change pose, background, framing, depth of field, or image quality. Do not change the overall compsition of the photo, do not add new people to the photo, only show each person in the photo one time.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/looksmaxing.png",
+        "order_id": 0,
+        "filter_id": "looks_maxxing",
+        "filter_type": "normal",
+        "filter_label": "Looks-Maxxing"
+      }
+    ],
+    "order_id": 1,
+    "created_at": "2026-09-11T23:10:57.185053+00:00",
+    "updated_at": "2026-09-11T23:10:57.185053+00:00"
+  },
+  {
+    "id": "looks",
+    "title": "Looks",
+    "active": true,
+    "filters": [
+      {
+        "uid": "4642e829-b0f1-4d05-a88e-3a38f978c783",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with their hair cut into a bob hairstyle, captured with a modern iPhone camera look.\\n\\nTransform the hair into a chin-length bob cut that frames the face evenly on both sides. The cut should follow a clean horizontal line around the jaw area, with slight inward curvature at the ends. Maintain the subject's original hair type, whether straight, wavy, or curly, preserving its natural texture, density, and movement rather than forcing a different style.\\n\\nKeep the original hairline, parting, and color exactly the same. Only adjust the length and shape to achieve the bob. Ensure the volume remains realistic and does not enlarge the head shape. The silhouette of the head should stay consistent, with the bob sitting naturally against it.\\n\\nAdd subtle layering or softness at the ends so the cut does not appear overly blunt or artificial. Include natural strand variation, slight flyaways, and realistic edge detail.\\n\\nEnsure lighting interacts naturally with the hair, with highlights and shadows consistent with the scene. Preserve depth and texture so the hair appears physically present.\\n\\nApply modern iPhone camera characteristics across the entire image: natural HDR, crisp detail, balanced highlights and shadows, and true-to-life but slightly vibrant colors.\\n\\nDo not alter the subject's face, expression, identity, or pose. Keep the background, framing, depth of field, and image quality exactly the same, with the hairstyle appearing as if it were naturally worn during capture. Do not change the overall compsition of the photo, do not add new people to the photo, only show each person in the photo one time.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/bob.png",
+        "order_id": 0,
+        "filter_id": "bob_cut",
+        "filter_type": "normal",
+        "filter_label": "Bob Cut"
+      },
+      {
+        "uid": "e0b23435-8c98-4fde-89ec-6074e497260f",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with a full, full-length beard added to the face, captured with a modern iPhone camera look.\\n\\nGenerate a dense, natural beard that covers the cheeks, jawline, chin, and connects to the mustache, extending to a full length appropriate to the subject's proportions (ranging from medium-full to longer, but not exaggerated beyond realism). The beard should match the subject's existing hair color exactly, including undertones, and reflect their natural hair type (straight, wavy, or curly). Ensure consistent density variation, with slightly lighter growth on the upper cheeks and fuller density along the jaw and chin.\\n\\nThe beard should grow from the natural follicle pattern of the face, following realistic growth directions and contours. Include subtle variation in strand thickness, length, and color for realism, along with natural tapering at the edges. The mustache should integrate seamlessly with the beard, resting naturally over the upper lip without obscuring it excessively unless consistent with realistic growth.\\n\\nEnsure the beard conforms to the face without altering facial structure, jaw size, or head proportions. Maintain the exact silhouette of the face aside from the added hair volume. Add soft shadows within the beard and where it meets the skin to create depth, and include subtle highlights where light hits the hair.\\n\\nPreserve skin texture at the edges and beneath thinner areas of the beard. Ensure lighting, color, and depth match the original scene so the beard appears naturally present.\\n\\nApply modern iPhone camera characteristics across the entire image: natural HDR, crisp detail, balanced highlights and shadows, and true-to-life but slightly vibrant colors.\\n\\nDo not alter the subject's face, expression, identity, or pose. Keep the background, framing, depth of field, and image quality exactly the same, with the beard appearing as if it were naturally grown. Do not change the overall compsition of the photo, do not add new people to the photo, only show each person in the photo one time.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/bearded.png",
+        "order_id": 0,
+        "filter_id": "beard",
+        "filter_type": "normal",
+        "filter_label": "Beard"
+      },
+      {
+        "uid": "c5a72554-ebd2-478d-a3f2-3912f40745b8",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with a buzzed and bleached hairstyle.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/bleached_hair.png",
+        "order_id": 0,
+        "filter_id": "blonde_bleached",
+        "filter_type": "normal",
+        "filter_label": "Blond & Bleached"
+      },
+      {
+        "uid": "eeb94073-24cf-47de-9488-e445ab8ea00d",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with multicolored braces visible on their teeth, captured with a modern iPhone camera look.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/braces.png",
+        "order_id": 0,
+        "filter_id": "braces",
+        "filter_type": "normal",
+        "filter_label": "Braces"
+      },
+      {
+        "uid": "04d5cc2f-4670-46c0-899b-db40418e2e13",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with the subject’s hair styled into two cute buns, captured with a modern iPhone camera look.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/buns.png",
+        "order_id": 0,
+        "filter_id": "buns",
+        "filter_type": "normal",
+        "filter_label": "Buns"
+      },
+      {
+        "uid": "3f0c166f-b126-4441-91e4-bbac33d4d55b",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with a mohawk hairstyle featuring shaved sides and a raised center strip, captured with a modern iPhone camera look.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/mohawk.png",
+        "order_id": 0,
+        "filter_id": "mohawk",
+        "filter_type": "normal",
+        "filter_label": "Mohawk"
+      },
+      {
+        "uid": "c808b822-dc1b-44be-8225-4214a22d15e5",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with a completely bald head.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/bowling_ball.png",
+        "order_id": 0,
+        "filter_id": "bowling_ball",
+        "filter_type": "normal",
+        "filter_label": "Bowling Ball"
+      },
+      {
+        "uid": "259fc1d0-4378-4bfd-ba40-f453cade646d",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with only the eyebrow hair removed.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/bye_brows.png",
+        "order_id": 0,
+        "filter_id": "bye_brows",
+        "filter_type": "normal",
+        "filter_label": "Bye Brows"
+      },
+      {
+        "uid": "38a138c2-3bc5-409a-b365-d09951fa71b0",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with face tattoos applied, captured with a modern iPhone camera look.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/tatted.png",
+        "order_id": 0,
+        "filter_id": "tatted",
+        "filter_type": "normal",
+        "filter_label": "Tatted"
+      }
+    ],
+    "order_id": 2,
+    "created_at": "2026-09-11T23:10:57.185053+00:00",
+    "updated_at": "2026-09-11T23:10:57.185053+00:00"
+  },
+  {
+    "id": "celebrate",
+    "title": "Celebrate",
+    "active": true,
+    "filters": [
+      {
+        "uid": "87bb2fd8-05b5-4789-a537-972fe0f62850",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with disco-style lighting effects cast across the scene, captured with a modern iPhone camera look.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/disco.png",
+        "order_id": 0,
+        "filter_id": "disco_lights",
+        "filter_type": "normal",
+        "filter_label": "Disco"
+      },
+      {
+        "uid": "44e642eb-8db9-4c11-98ff-deefc5b20c6b",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with U.S. $100 bills falling through the scene as if it is raining cash, captured with a modern iPhone camera look.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/cash.png",
+        "order_id": 0,
+        "filter_id": "cash_money",
+        "filter_type": "normal",
+        "filter_label": "Ca$h Money"
+      },
+      {
+        "uid": "f89629e5-5151-4ecb-a2ba-a5675096107b",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with thick green Nickelodeon-style slime being poured and splashing throughout the scene, captured with a modern iPhone camera look.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/slimed.png",
+        "order_id": 0,
+        "filter_id": "slimed",
+        "filter_type": "normal",
+        "filter_label": "Slimed"
+      },
+      {
+        "uid": "bfee586f-e6d2-456a-b77a-fe54da47ebf7",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with multicolored confetti falling through the scene, captured with a modern iPhone camera look.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/happy_birthday.png",
+        "order_id": 0,
+        "filter_id": "happy_birthday",
+        "filter_type": "normal",
+        "filter_label": "Happy Birthday"
+      },
+      {
+        "uid": "046e2a87-340e-4168-8a51-b863483e142e",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but wearing a pink sash with white trim that says \\\"Princess,\\\" along with a tiara, captured with a modern iPhone camera look.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/princess.png",
+        "order_id": 0,
+        "filter_id": "princess",
+        "filter_type": "normal",
+        "filter_label": "Princess"
+      }
+    ],
+    "order_id": 3,
+    "created_at": "2026-09-11T23:10:57.185053+00:00",
+    "updated_at": "2026-09-11T23:10:57.185053+00:00"
+  },
+  {
+    "id": "cute",
+    "title": "Cute",
+    "active": true,
+    "filters": [
+      {
+        "uid": "1600111c-0034-4878-aec6-78d37c6a50e1",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but wearing a mixed wildflower crown.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/flower_crown.png",
+        "order_id": 0,
+        "filter_id": "flower_crown",
+        "filter_type": "normal",
+        "filter_label": "Flowe Crown"
+      },
+      {
+        "uid": "bbaa7385-ebe1-48cc-b5e2-0305b80ae429",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but wearing playful costume antennae with yellow hearts at the tips, captured with a modern iPhone camera look.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/love_bug.png",
+        "order_id": 0,
+        "filter_id": "love_bug",
+        "filter_type": "normal",
+        "filter_label": "Love Bug"
+      },
+      {
+        "uid": "ffe11123-de38-42a1-b6cc-77c96d493851",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with a variety of multicolored heart-shaped stickers applied across the face in a playful, scattered arrangement similar to decorative sticker styling.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/sticker_face.png",
+        "order_id": 0,
+        "filter_id": "sticker_face",
+        "filter_type": "normal",
+        "filter_label": "Sticker Face"
+      },
+      {
+        "uid": "8f6527b7-5145-4d7c-8171-be85e47bfa54",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with cute rosy cheeks and a small cluster of freckles limited to the cheeks and the bridge of the nose, captured with a modern iPhone camera look.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/cutesy.png",
+        "order_id": 0,
+        "filter_id": "cutesy",
+        "filter_type": "normal",
+        "filter_label": "Cutesy"
+      }
+    ],
+    "order_id": 4,
+    "created_at": "2026-09-11T23:10:57.185053+00:00",
+    "updated_at": "2026-09-11T23:10:57.185053+00:00"
+  },
+  {
+    "id": "costumes",
+    "title": "Costumes",
+    "active": true,
+    "filters": [
+      {
+        "uid": "e94e84db-5068-45df-a46b-98dc395be2e4",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with subjects dressed in wedding attire appropriate to their presentation, captured with a modern iPhone camera look.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/wedding.png",
+        "order_id": 0,
+        "filter_id": "wedding",
+        "filter_type": "normal",
+        "filter_label": "Wedding"
+      },
+      {
+        "uid": "c7080dc0-9f8f-4f08-85b7-c49caa0ba998",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but styled as clowns, captured with a modern iPhone camera look.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/clown.png",
+        "order_id": 0,
+        "filter_id": "clown",
+        "filter_type": "normal",
+        "filter_label": "Clown"
+      },
+      {
+        "uid": "00f26a0f-7fdb-4b95-ae37-0e8e3d6bc390",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with subjects dressed in Western attire appropriate to each person, captured with a modern iPhone camera look.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/cowboy.png",
+        "order_id": 0,
+        "filter_id": "cowboy_cowgirl",
+        "filter_type": "normal",
+        "filter_label": "Cowboy & Cowgirl"
+      },
+      {
+        "uid": "34894651-be5e-4da0-86b5-de1872865847",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but with the subject wearing a giraffe costume, captured with a modern iPhone camera look.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/giraffe.png",
+        "order_id": 0,
+        "filter_id": "giraffe",
+        "filter_type": "normal",
+        "filter_label": "Giraffe"
+      }
+    ],
+    "order_id": 5,
+    "created_at": "2026-09-11T23:11:56.971252+00:00",
+    "updated_at": "2026-09-11T23:11:56.971252+00:00"
+  },
+  {
+    "id": "holidays",
+    "title": "Holidays",
+    "active": true,
+    "filters": [
+      {
+        "uid": "88b977fd-b7e9-484e-a5a3-d1f661177086",
+        "active": true,
+        "prompt": "Show the person in the photo with the exact same pose and background, but add cute, subtle freckles concentrated across the bridge of the nose and upper cheeks. Add small green clover sticker decals on both cheeks (one per cheek), glossy sticker texture with clean edges. Keep the person's likeness, pose, lighting, and background unchanged. Photorealistic, natural skin texture, no extra makeup, no other changes. If no person is present, return the image unaltered. Do not change the overall compsition of the photo, do not add new people to the photo, only show each person in the photo one time.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/lucky_face.png",
+        "order_id": 0,
+        "filter_id": "lucky_face",
+        "filter_type": "normal",
+        "filter_label": "Lucky Face"
+      },
+      {
+        "uid": "36aac7b1-b822-4e70-969b-9f98dc60b98c",
+        "active": true,
+        "prompt": "Show the person in the photo with the exact same pose, framing, expression, and background, but dress them in leprechaun costume: a green top hat with a gold buckle and black band as well as matching outfit. Keep their pose and background identical. Do not change the person’s face, hairstyle, body shape, position in frame, likeness, or facial expression. Do not remove anyone from the original photo. Do not add extra people or limbs. If no person is present, return the image unaltered. Do not change the overall compsition of the photo, do not add new people to the photo, only show each person in the photo one time.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/leprechaun.png",
+        "order_id": 0,
+        "filter_id": "leprechaun",
+        "filter_type": "normal",
+        "filter_label": "Leprechaun"
+      },
+      {
+        "uid": "1337e445-c667-4105-a096-9a255343dbb1",
+        "active": true,
+        "prompt": "Show the person in the photo with the exact same pose and background, but dressed up as Santa Claus. Ensure the person is in the exact same pose and positioning within the frame. If no face is present, do not show any people in the output, only ever show people who were in the original input image.  Do not change the overall compsition of the photo, do not add new people to the photo, only show each person in the photo one time.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/santa.png",
+        "order_id": 0,
+        "filter_id": "santa_cutout",
+        "filter_type": "normal",
+        "filter_label": "Santa"
+      },
+      {
+        "uid": "518791db-85fe-45b3-8488-ee928d4028d6",
+        "active": true,
+        "prompt": "Show the persons in the photo with the exact same pose and background, but put them in a bright yellow Easter chick costume: a fluffy yellow onesie suit with a rounded hood, small orange beak on the hood above the forehead, and tiny chick wings as sleeves. Add soft plush texture and natural folds. Keep the person’s face, hairline (if visible), pose, and background exactly the same. If any of the body parts mentioned (for example hands and feet) are not present, do not add them to the photo. If no people are present, return the image unaltered. Do not change the overall compsition of the photo, do not add new people to the photo, only show each person in the photo one time.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/easter_chick.png",
+        "order_id": 0,
+        "filter_id": "easter_chick_cutout",
+        "filter_type": "normal",
+        "filter_label": "Easter Chick"
+      },
+      {
+        "uid": "de8c0a1e-7e49-4295-bc38-3a55b8aad4ea",
+        "active": true,
+        "prompt": "Show the person in the photo with the exact same pose and background, but have them holding a big candy heart. The color of the candy heart should be picked randomly from the following list: Light pink, White, Yellow, Orange, Green, Purple. The phrase should be a short one-to-two word phrase be picked randomly from the following list: Be Mine, Love You, Kiss Me, Hug Me, XOXO, Cutie. Keep their pose and background identical. If no person is present in the input, do not add anything to the output. Do not change the overall compsition of the photo, do not add new people to the photo, only show each person in the photo one time.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/sweat_hearts.png",
+        "order_id": 0,
+        "filter_id": "sweet_hearts",
+        "filter_type": "normal",
+        "filter_label": "Sweet Hearts"
+      },
+      {
+        "uid": "c0e0615d-541f-41b5-85bd-c4eafc705575",
+        "active": true,
+        "prompt": "Show the people in the photo with the exact same pose and background, but put the person in an Easter Bunny costume: fluffy white costume, oversized bunny hood with long pink-lined ears, white gloves, white furry feet. Keep the person’s face visible (no full mask), preserve their exact likeness, pose, lighting, and background. Photorealistic, clean costume seams, soft fur texture, no other changes. If any of the body parts mentioned (for example hands and feet) are not present, do not add them to the photo. If no people are present, return the image unaltered. Do not change the overall compsition of the photo, do not add new people to the photo, only show each person in the photo one time.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/easter_bunny.png",
+        "order_id": 0,
+        "filter_id": "easter_bunney_cutout",
+        "filter_type": "normal",
+        "filter_label": "Easter Bunny"
+      },
+      {
+        "uid": "38889e52-5bde-4c1c-9e5f-319a02170e1a",
+        "active": true,
+        "prompt": "Show the person in the photo with the exact same pose and background, but give them a short medium-length ginger beard and matching ginger eyebrows. Keep the face, hairstyle, and everything else the same. Keep their pose and background identical. If no person is present, return the image unaltered. Do not change the overall compsition of the photo, do not add new people to the photo, only show each person in the photo one time.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/bearded.png",
+        "order_id": 0,
+        "filter_id": "bearded",
+        "filter_type": "normal",
+        "filter_label": "Bearded"
+      },
+      {
+        "uid": "faf0f190-2b24-4d39-8bca-be084aa5ad26",
+        "active": true,
+        "prompt": "Show the person in the photo with the exact same pose and background, but with themselves and the background covered in snow. Ensure the person is in the exact same pose and positioning within the frame. If no face is present, do not show any people in the output, only ever show people who were in the original input image. Do not change the overall compsition of the photo, do not add new people to the photo, only show each person in the photo one time.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/frosty.png",
+        "order_id": 0,
+        "filter_id": "frosty",
+        "filter_type": "normal",
+        "filter_label": "Frosty"
+      },
+      {
+        "uid": "70bf764f-28ba-4866-9097-f392a96de399",
+        "active": true,
+        "prompt": "Show the person in the photo with the exact same pose and background, but dressed up as an Elf. Ensure the person is in the exact same pose and positioning within the frame. If no face is present, do not show any people in the output, only ever show people who were in the original input image. Do not change the overall compsition of the photo, do not add new people to the photo, only show each person in the photo one time.",
+        "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/elf.png",
+        "order_id": 0,
+        "filter_id": "elf_cutout",
+        "filter_type": "normal",
+        "filter_label": "Eft"
+      }
+    ],
+    "order_id": 6,
+    "created_at": "2026-09-11T23:11:56.971252+00:00",
+    "updated_at": "2026-09-11T23:11:56.971252+00:00"
+  }
+]
