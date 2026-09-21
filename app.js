@@ -8,6 +8,25 @@ import path from "path";
 import { generateImageFromGradio, resetGradioClient } from "./gradioService.js";
 import { proxyState } from "./proxyManager.js";
 
+const app = express();
+const server = http.createServer(app);
+
+import { Server } from "socket.io";
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
+
+io.on("connection", (socket) => {
+  origLog(`🔗 Client connected to Socket.IO: ${socket.id}`);
+
+  socket.on("disconnect", () => {
+    origLog(`🔗 Client disconnected: ${socket.id}`);
+  });
+});
+
 // Override console.log và console.error để in kèm thời gian và khoảng cách (giây) giữa các lần log
 let lastLogTime = Date.now();
 const origLog = console.log;
@@ -21,11 +40,54 @@ function formatLogTime() {
   return `[${timeStr} | +${diff}s]`;
 }
 
-console.log = (...args) => origLog(formatLogTime(), ...args);
-console.error = (...args) => origError(formatLogTime(), ...args);
+function mapLogToClientMessage(msg) {
+  if (msg.includes("🎨 Nhận yêu cầu tạo ảnh mới")) return "Đang nhận yêu cầu";
+  if (msg.includes("[Proxy] Khởi tạo Client")) return "Đang khởi tạo";
+  if (msg.includes("✅ Kết nối Gradio client thành công")) return "Kết nối thành công!";
+  if (msg.includes("❌ Lỗi từ AI Model trong quá trình tạo")) return "Lỗi từ AI Model trong quá trình tạo";
 
-const app = express();
-const server = http.createServer(app);
+  const uploadMatch = msg.match(/Thử lần (\d+).*Đang gửi dữ liệu sang Hugging Face Space/);
+  if (uploadMatch) return `Đang gửi dữ liệu lên server lần ${uploadMatch[1]}`;
+
+  const proxyMatch = msg.match(/Bắt đầu quá trình chọn proxy để kết nối tới Gradio \(Thử lần (\d+)/);
+  if (proxyMatch) return `Thử lại lần ${proxyMatch[1]}`;
+
+  if (msg.includes("⌛ Đang trong hàng chờ")) return "Đang trong hàng chờ";
+  if (msg.includes("⚡ uploading image")) return "Upload ảnh";
+  if (msg.includes("✅ Lấy link ảnh trực tiếp thành công")) return "User nhận link ảnh";
+
+  // Những log muốn giữ nguyên nội dung
+  if (msg.includes("⚡ submitting edit task")) return msg;
+  if (msg.includes("⚡ task submitted")) return msg;
+  if (msg.includes("⚡ 📋 Task status: queued")) return msg;
+  if (msg.includes("⚡ Generating... Almost done")) return msg;
+  if (msg.includes("✨ Đã nhận phản hồi thành công từ AI Model")) return msg;
+
+  return null; // Không gửi về client những log khác
+}
+
+console.log = (...args) => {
+  const formattedTime = formatLogTime();
+  origLog(formattedTime, ...args);
+  const msg = typeof args[0] === 'string' ? args.join(" ") : JSON.stringify(args);
+
+  const mappedMsg = mapLogToClientMessage(msg);
+  if (mappedMsg) {
+    io.emit("log", { time: formattedTime, message: mappedMsg, type: "info" });
+  }
+};
+
+console.error = (...args) => {
+  const formattedTime = formatLogTime();
+  origError(formattedTime, ...args);
+  const msg = typeof args[0] === 'string' ? args.join(" ") : JSON.stringify(args);
+
+  const mappedMsg = mapLogToClientMessage(msg);
+  if (mappedMsg) {
+    io.emit("log", { time: formattedTime, message: mappedMsg, type: "error" });
+  }
+};
+
 const PORT = process.env.PORT || 4000;
 
 app.use(cors());

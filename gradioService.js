@@ -4,36 +4,36 @@ import { fetch as undiciFetch, Agent } from "undici";
 import { findFastestProxy, applyProxy, proxyState } from "./proxyManager.js";
 import fs from "fs";
 
-export async function connectClientWithRetry() {
-  console.log(`[Proxy] Bắt đầu quá trình chọn proxy để kết nối tới Gradio...`);
-  const proxy = await findFastestProxy(8); // Lấy 8 proxy ngẫu nhiên để đua
+export async function connectClientWithRetry(maxRetries = 3) {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    console.log(`[Proxy] Bắt đầu quá trình chọn proxy để kết nối tới Gradio (Thử lần ${attempt}/${maxRetries})...`);
+    const proxy = await findFastestProxy(8); // Lấy 8 proxy ngẫu nhiên để đua
 
-  applyProxy(proxy);
+    if (!proxy) {
+      console.log("⚠️ Không tìm thấy proxy nào hoạt động. Đang thử lại...");
+      continue;
+    }
 
-  try {
-    console.log(`[Proxy] Khởi tạo Client...`);
-    const client = await Client.connect("selfit-camera/omni-image-editor", {
-      events: ["data", "status", "log", "update", "generating"]
-    });
-    console.log(`✅ Kết nối Gradio client thành công!`);
-    return client;
-  } catch (err) {
-    console.error(`❌ Kết nối thất bại với proxy ${proxy || 'direct'}:`, err.message);
-    if (proxy) {
+    applyProxy(proxy);
+
+    try {
+      console.log(`[Proxy] Khởi tạo Client...`);
+      const client = await Client.connect("selfit-camera/omni-image-editor", {
+        events: ["data", "status", "log", "update", "generating"]
+      });
+      console.log(`✅ Kết nối Gradio client thành công!`);
+      return client;
+    } catch (err) {
+      console.error(`❌ Kết nối thất bại với proxy ${proxy}:`, err.message);
       if (!proxyState.bannedProxies.includes(proxy)) {
         proxyState.bannedProxies.push(proxy);
         console.log(`[Proxy] 🚫 Đã đưa ${proxy} vào danh sách đen do khởi tạo Client thất bại.`);
       }
-      console.log("⚠️ Thử lại bằng kết nối trực tiếp (Direct IP)...");
-      applyProxy(null);
-      const client = await Client.connect("selfit-camera/omni-image-editor", {
-        events: ["data", "status", "log", "update", "generating"]
-      });
-      console.log(`✅ Kết nối Gradio client (Direct IP) thành công!`);
-      proxyState.currentActiveProxy = null;
-      return client;
-    } else {
-      throw err;
+
+      if (attempt === maxRetries) {
+        console.error("❌ Đã hết số lần thử kết nối Gradio bằng Proxy.");
+        throw err;
+      }
     }
   }
 }
@@ -56,7 +56,7 @@ export async function generateImageFromGradio(file, imageUrl, prompt, attempt, m
   let imageInput;
   let origWidth = null;
   let origHeight = null;
-  
+
   try {
     let inputBuffer;
     if (file) {
@@ -65,7 +65,7 @@ export async function generateImageFromGradio(file, imageUrl, prompt, attempt, m
       const fetchRes = await undiciFetch(imageUrl);
       inputBuffer = Buffer.from(await fetchRes.arrayBuffer());
     }
-    
+
     if (inputBuffer) {
       const metadata = await sharp(inputBuffer).metadata();
       origWidth = metadata.width;
@@ -118,33 +118,8 @@ export async function generateImageFromGradio(file, imageUrl, prompt, attempt, m
 
         const srcMatch = htmlOutput?.match(/src=["'](.*?)["']/);
         finalImageUrl = srcMatch ? srcMatch[1] : null;
-        
         if (finalImageUrl) {
-          console.log(`📏 Đang tải và thu nhỏ ảnh về tối đa 500px...`);
-          try {
-            const imgRes = await undiciFetch(finalImageUrl, {
-              dispatcher: new Agent(),
-              headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-              }
-            });
-            
-            if (!imgRes.ok) {
-                throw new Error(`HTTP ${imgRes.status} ${imgRes.statusText}`);
-            }
-            
-            const imgBuffer = Buffer.from(await imgRes.arrayBuffer());
-            
-            const resizedBuffer = await sharp(imgBuffer)
-              .resize({ width: 500, height: 500, fit: 'inside' })
-              .jpeg({ quality: 85 })
-              .toBuffer();
-              
-            finalImageUrl = `data:image/jpeg;base64,${resizedBuffer.toString("base64")}`;
-            console.log("✅ Đã bóp nhỏ và nén Base64 thành công!");
-          } catch (resizeErr) {
-            console.error("⚠️ Lỗi khi resize ảnh:", resizeErr.message);
-          }
+          console.log("✅ Lấy link ảnh trực tiếp thành công:", finalImageUrl);
         }
       } else {
         console.error("⚠️ Payload data không đúng định dạng:", msg);
