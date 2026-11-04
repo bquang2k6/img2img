@@ -387,7 +387,7 @@
       {
         "uid": "c0e0615d-541f-41b5-85bd-c4eafc705575",
         "active": true,
-        "prompt": "Show the people in the photo with the exact same pose and background, but put the person in an Easter Bunny costume: fluffy white costume, oversized bunny hood with long pink-lined ears, white gloves, white furry feet. Keep the person’s face visible (no full mask), preserve their exact likeness, pose, lighting, and background. Photorealistic, clean costume seams, soft fur texture, no other changes. If any of the body parts mentioned (for example hands and feet) are not present, do not add them to the photo. If no people are present, return the image unaltered. Do not change the overall compsition of the photo, do not add new people to the photo, only show each person in the photo one time.",
+        "prompt": "Show the people from the original image with the exact same poses and background, but have them hold a large heart-shaped candy. The heart-shaped candy must be yellow. The text on the candy must read 'Locket'. Keep their poses and background unchanged. If there are no people in the original image, do not add any elements to the resulting image. Do not alter the overall composition, do not add new people, and ensure each person appears only once.",
         "icon_url": "https://raw.githubusercontent.com/bquang2k6/gif/refs/heads/master/icon/filter_icons/easter_bunny.png",
         "order_id": 0,
         "filter_id": "easter_bunney_cutout",

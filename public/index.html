@@ -133,6 +133,8 @@
         value="https://cdn.locketcamera.com/v0/b/locket-img/o/users%2FlyRXodkVEoaM1XGppIsiLuumSSX2%2Fmoments%2Fthumbnails%2FKk7rGnMTyJwUjjnWEPag.webp?alt=media&token=50b5f2e4-4bd1-4625-9ca1-fbf724670d57"
         required>
       <div id="input-preview" class="preview"></div>
+      <label for="filter_id">Filter ID (Optional)</label>
+      <input type="text" id="filter_id" placeholder="e.g. bob_cut">
       <label for="prompt">Prompt</label>
       <textarea id="prompt"
         required>Show the person in the photo with the exact same pose and background, but add cute, subtle freckles concentrated across the bridge of the nose and upper cheeks. Add small green clover sticker decals on both cheeks (one per cheek), glossy sticker texture with clean edges. Keep the person's likeness, pose, lighting, and background unchanged. Photorealistic, natural skin texture, no extra makeup, no other changes. If no person is present, return the image unaltered. Do not change the overall compsition of the photo, do not add new people to the photo, only show each person in the photo one time</textarea>
@@ -172,6 +174,7 @@
           body: JSON.stringify({
             image_url: imageUrlInput.value,
             prompt: document.getElementById('prompt').value,
+            filter_id: document.getElementById('filter_id').value,
           }),
         });
         const data = await res.json();

@@ -102,10 +102,95 @@ app.get("/api/data", (req, res) => {
   res.sendFile(path.join(process.cwd(), "filters.json"));
 });
 
+// Trả về cấu hình AI theo từng gói thành viên
+app.post("/api/generate-image", (req, res) => {
+  const plan = req.headers["x-user-plan"] || "free";
+  
+  if (plan === "pro") {
+    return res.json({
+      success: true,
+      fastModel: {
+        model: "p-image-edit",
+        generateUrl: "https://playground.pruna.ai/api/p-image-edit/generate",
+        statusUrl: "https://playground.pruna.ai/api/generation-status?model=p-image-edit"
+      },
+      normalModel: {
+        model: "upsampler-qwen-image-edit",
+        joinUrl: "https://upsampler-qwen-image-edit.hf.space/gradio_api/queue/join?",
+        dataUrl: "https://upsampler-qwen-image-edit.hf.space/gradio_api/queue/data?session_hash=${session_hash}",
+        uploadUrl: "https://upsampler-qwen-image-edit.hf.space/gradio_api/upload"
+      },
+      slowModel: {
+        generateUrl: "https://ai.locket-wan.top/api/generate",
+        limit: 5
+      }
+    });
+  } else if (plan === "lite") {
+    return res.json({
+      success: true,
+      normalModel: {
+        model: "upsampler-qwen-image-edit",
+        joinUrl: "https://upsampler-qwen-image-edit.hf.space/gradio_api/queue/join?",
+        dataUrl: "https://upsampler-qwen-image-edit.hf.space/gradio_api/queue/data?session_hash=${session_hash}",
+        uploadUrl: "https://upsampler-qwen-image-edit.hf.space/gradio_api/upload"
+      },
+      slowModel: {
+        generateUrl: "https://ai.locket-wan.top/api/generate",
+        limit: 2
+      }
+    });
+  } else {
+    // FREE
+    return res.json({
+      success: true,
+      normalModel: {
+        model: "upsampler-qwen-image-edit",
+        joinUrl: "https://upsampler-qwen-image-edit.hf.space/gradio_api/queue/join?",
+        dataUrl: "https://upsampler-qwen-image-edit.hf.space/gradio_api/queue/data?session_hash=${session_hash}",
+        uploadUrl: "https://upsampler-qwen-image-edit.hf.space/gradio_api/upload"
+      }
+    });
+  }
+});
+
 app.post("/api/generate", upload.single("image"), async (req, res) => {
   const file = req.file;
   const imageUrl = req.body.image_url;
-  const prompt = req.body.prompt;
+  let prompt = req.body.prompt;
+  let filterId = req.body.filter_id;
+
+  if (!filterId && prompt) {
+    try {
+      const filtersData = JSON.parse(fs.readFileSync(path.join(process.cwd(), "filters.json"), "utf8"));
+      const normalize = (s) => {
+        let str = String(s).replace(/\\n/g, " ").replace(/\n/g, " ");
+        str = str.replace(/[^a-zA-Z0-9]/g, "");
+        return str.toLowerCase();
+      };
+      const normalizedPrompt = normalize(prompt);
+
+      for (const category of filtersData) {
+        for (const filter of category.filters) {
+          if (filter.prompt && normalizedPrompt.includes(normalize(filter.prompt))) {
+            filterId = filter.filter_id;
+            break;
+          }
+        }
+        if (filterId) break;
+      }
+    } catch (err) {
+      console.error("Lỗi khi đọc filters.json:", err.message);
+    }
+  }
+
+  if (filterId) {
+    prompt = `${prompt} ${filterId}`;
+  }
+
+  // Tự động gắn thêm yêu cầu giữ nguyên tỷ lệ 1:1 vào đầu prompt nếu chưa có
+  if (!prompt.includes("1:1 aspect ratio")) {
+    prompt = `Maintain a 1:1 aspect ratio, exact same zoom level, original camera distance, and perspective. Do not crop or change the object scale. ${prompt}`;
+  }
 
   if ((!file && !imageUrl) || !prompt) {
     if (file && fs.existsSync(file.path)) fs.unlinkSync(file.path);
@@ -114,6 +199,11 @@ app.post("/api/generate", upload.single("image"), async (req, res) => {
 
   console.log("\n--------------------------------------------------");
   console.log("🎨 Nhận yêu cầu tạo ảnh mới...");
+  if (filterId) {
+    console.log(`🎯 Đã nhận diện Filter ID: ${filterId}`);
+  } else {
+    console.log("⚠️ Không tìm thấy Filter ID nào khớp với prompt.");
+  }
 
   const maxRetries = 3;
 
@@ -151,6 +241,7 @@ app.post("/api/generate", upload.single("image"), async (req, res) => {
     fs.unlinkSync(file.path);
   }
 });
+
 
 server.listen(PORT, () => {
   console.log(`Server đang chạy tại http://localhost:${PORT}`);
