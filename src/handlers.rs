@@ -1,6 +1,7 @@
+use std::path::{Component, Path as FsPath, PathBuf};
 use std::sync::Arc;
 
-use axum::extract::{FromRequest, Multipart, Request, State};
+use axum::extract::{FromRequest, Multipart, Path, Request, State};
 use axum::http::{StatusCode, header};
 use axum::response::{IntoResponse, Response};
 use axum::{Form, Json};
@@ -50,6 +51,8 @@ pub async fn root_status(State(state): State<Arc<AppState>>) -> Response {
             "model": state.config.kira_model,
             "endpoints": {
                 "data": "GET /api/data",
+                "photboot": "GET /api/photboot",
+                "photboot_assets": "GET /api/photboot/{*path}",
                 "generate": "POST /api/generate",
                 "generate_image": "POST /api/generate-image",
                 "socket_io": "/socket.io/"
@@ -72,6 +75,100 @@ pub async fn get_filters_data() -> Response {
             format!("Không thể đọc filters.json: {err}"),
         ),
     }
+}
+
+fn sanitize_relative_path(raw: &str) -> Option<PathBuf> {
+    let trimmed = raw.trim().trim_start_matches('/');
+    if trimmed.is_empty() || trimmed.contains('\\') {
+        return None;
+    }
+
+    let mut clean = PathBuf::new();
+    for component in FsPath::new(trimmed).components() {
+        match component {
+            Component::Normal(part) => clean.push(part),
+            _ => return None,
+        }
+    }
+
+    if clean.as_os_str().is_empty() {
+        None
+    } else {
+        Some(clean)
+    }
+}
+
+fn resolve_photoboot_candidates(rel: &FsPath) -> Vec<PathBuf> {
+    let base = FsPath::new("photoboot");
+    let mut candidates = vec![base.join(rel)];
+    if !rel.starts_with("frames") {
+        candidates.push(base.join("frames").join(rel));
+    }
+    candidates
+}
+
+fn content_type_for_path(path: &FsPath) -> &'static str {
+    match path
+        .extension()
+        .and_then(|e| e.to_str())
+        .map(|s| s.to_ascii_lowercase())
+        .as_deref()
+    {
+        Some("png") => "image/png",
+        Some("jpg" | "jpeg") => "image/jpeg",
+        Some("webp") => "image/webp",
+        Some("gif") => "image/gif",
+        Some("svg") => "image/svg+xml",
+        Some("json") => "application/json; charset=utf-8",
+        _ => "application/octet-stream",
+    }
+}
+
+pub async fn get_photoboot_metadata() -> Response {
+    match tokio::fs::read("photoboot/frame.json").await {
+        Ok(bytes) => (
+            StatusCode::OK,
+            [
+                (header::CONTENT_TYPE, "application/json; charset=utf-8"),
+                (header::CACHE_CONTROL, "public, max-age=3600"),
+            ],
+            bytes,
+        )
+            .into_response(),
+        Err(err) => json_error(
+            StatusCode::NOT_FOUND,
+            format!("Không thể đọc photoboot/frame.json: {err}"),
+        ),
+    }
+}
+
+pub async fn get_photoboot_asset(Path(raw_path): Path<String>) -> Response {
+    let Some(rel_path) = sanitize_relative_path(&raw_path) else {
+        return json_error(StatusCode::BAD_REQUEST, "Đường dẫn ảnh photobooth không hợp lệ");
+    };
+
+    for candidate in resolve_photoboot_candidates(&rel_path) {
+        if let Ok(meta) = tokio::fs::metadata(&candidate).await
+            && meta.is_file()
+            && let Ok(bytes) = tokio::fs::read(&candidate).await
+        {
+            let mime = content_type_for_path(&candidate);
+            return (
+                StatusCode::OK,
+                [
+                    (header::CONTENT_TYPE, mime),
+                    (header::CACHE_CONTROL, "public, max-age=86400"),
+                ],
+                bytes,
+            )
+                .into_response();
+        }
+    }
+
+    json_error(
+        StatusCode::NOT_FOUND,
+        format!("Không tìm thấy file photobooth: {raw_path}"),
+    )
 }
 
 async fn parse_generate_request(
@@ -367,5 +464,50 @@ pub async fn handle_generate(State(state): State<Arc<AppState>>, req: Request) -
         })),
     )
         .into_response()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn sanitize_relative_path_rejects_traversal_and_backslashes() {
+        assert!(sanitize_relative_path("").is_none());
+        assert!(sanitize_relative_path("../Cargo.toml").is_none());
+        assert!(sanitize_relative_path("frames/../../.env").is_none());
+        assert!(sanitize_relative_path("frames\\app-samples\\a.png").is_none());
+        assert_eq!(
+            sanitize_relative_path("/frames/app-samples/app-locket-photo.png"),
+            Some(PathBuf::from("frames/app-samples/app-locket-photo.png"))
+        );
+    }
+
+    #[test]
+    fn resolve_photoboot_candidates_supports_with_or_without_frames_prefix() {
+        let with_frames = resolve_photoboot_candidates(FsPath::new("frames/app-samples/a.png"));
+        assert_eq!(
+            with_frames,
+            vec![PathBuf::from("photoboot/frames/app-samples/a.png")]
+        );
+
+        let without_frames = resolve_photoboot_candidates(FsPath::new("app-samples/a.png"));
+        assert_eq!(
+            without_frames,
+            vec![
+                PathBuf::from("photoboot/app-samples/a.png"),
+                PathBuf::from("photoboot/frames/app-samples/a.png"),
+            ]
+        );
+    }
+
+    #[test]
+    fn content_type_detects_images_and_json() {
+        assert_eq!(content_type_for_path(FsPath::new("a.png")), "image/png");
+        assert_eq!(content_type_for_path(FsPath::new("a.JPG")), "image/jpeg");
+        assert_eq!(
+            content_type_for_path(FsPath::new("frame.json")),
+            "application/json; charset=utf-8"
+        );
+    }
 }
 

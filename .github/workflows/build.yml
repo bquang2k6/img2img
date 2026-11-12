@@ -38,9 +38,10 @@ jobs:
           mkdir -p dist
           cp target/release/img-to-img-server dist/
           cp filters.json dist/
+          if [ -d photoboot ]; then cp -r photoboot dist/; fi
           chmod +x dist/img-to-img-server
           cd dist
-          zip -r ../img-to-img-server-linux-x86_64.zip img-to-img-server filters.json
+          zip -r ../img-to-img-server-linux-x86_64.zip .
 
       - name: Upload deploy artifact
         uses: actions/upload-artifact@v4
