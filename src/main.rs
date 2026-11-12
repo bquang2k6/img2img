@@ -14,7 +14,7 @@ use socketioxide::extract::SocketRef;
 use tower_http::cors::CorsLayer;
 
 use crate::config::AppConfig;
-use crate::handlers::{AppState, get_filters_data, handle_generate};
+use crate::handlers::{AppState, get_filters_data, handle_generate, root_status};
 use crate::logger::AppLogger;
 
 const MAX_BODY_SIZE: usize = 50 * 1024 * 1024;
@@ -46,6 +46,7 @@ async fn main() {
     });
 
     let app = Router::new()
+        .route("/", get(root_status))
         .route("/api/data", get(get_filters_data))
         .route("/api/generate", post(handle_generate))
         .route("/api/generate-image", post(handle_generate))

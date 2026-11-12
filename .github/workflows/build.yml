@@ -1,0 +1,55 @@
+name: Build & Test Rust Server
+
+on:
+  push:
+    branches: [main, master]
+    tags: ["v*"]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Cargo dependencies
+        uses: Swatinem/rust-cache@v2
+
+      - name: Run tests
+        run: cargo test
+
+      - name: Build release binary
+        run: cargo build --release
+
+      - name: Package Botkeep deploy bundle
+        run: |
+          mkdir -p dist
+          cp target/release/img-to-img-server dist/
+          cp filters.json dist/
+          chmod +x dist/img-to-img-server
+          cd dist
+          zip -r ../img-to-img-server-linux-x86_64.zip img-to-img-server filters.json
+
+      - name: Upload deploy artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: img-to-img-server-linux-x86_64
+          path: img-to-img-server-linux-x86_64.zip
+
+      - name: Attach bundle to GitHub Release (on tag)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: img-to-img-server-linux-x86_64.zip

@@ -41,6 +41,24 @@ fn json_error(status: StatusCode, message: impl Into<String>) -> Response {
     (status, Json(json!({ "error": message.into() }))).into_response()
 }
 
+pub async fn root_status(State(state): State<Arc<AppState>>) -> Response {
+    (
+        StatusCode::OK,
+        Json(json!({
+            "status": "ok",
+            "service": "img-to-img-server",
+            "model": state.config.kira_model,
+            "endpoints": {
+                "data": "GET /api/data",
+                "generate": "POST /api/generate",
+                "generate_image": "POST /api/generate-image",
+                "socket_io": "/socket.io/"
+            }
+        })),
+    )
+        .into_response()
+}
+
 pub async fn get_filters_data() -> Response {
     match tokio::fs::read("filters.json").await {
         Ok(bytes) => (

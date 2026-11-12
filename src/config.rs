@@ -13,6 +13,7 @@ impl AppConfig {
         dotenvy::dotenv().ok();
 
         let port = env::var("PORT")
+            .or_else(|_| env::var("SERVER_PORT"))
             .ok()
             .and_then(|v| v.parse::<u16>().ok())
             .unwrap_or(4000);
